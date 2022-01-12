@@ -10,9 +10,9 @@ class userControllers {
             if (!errors.isEmpty()) {
                 return next(ApiError.BadRequest('Ошибка валидации', errors.array()));
             }
-            const {email, password} = req.body;
-            const userData = await userService.registration(email, password);
-            res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
+            const {email, password,role} = req.body;
+            const userData = await userService.registration(email, password,role);
+            res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 10000, httpOnly: true})
 
             return res.json(userData);
         } catch (e) {
@@ -25,7 +25,7 @@ class userControllers {
         try {
             const {email, password} = req.body;
             const userData = await userService.login(email, password);
-            res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
+            res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 10000, httpOnly: true})
 
             return res.json(userData);
 
@@ -59,7 +59,7 @@ class userControllers {
         try {
             const {refreshToken} = req.cookies;
             const userData = await userService.refresh(refreshToken);
-            res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
+            res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 10000, httpOnly: true})
 
             return res.json(userData);
 

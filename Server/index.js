@@ -9,7 +9,11 @@ const PORT = process.env.PORT;
 const errorMiddle = require("./middlewares/error-middle")
 
 
-app.use(cors());
+app.use(cors({
+        credentials: true,
+        origin: process.env.CLIENT_URL
+    }
+));
 app.use(cookeParser());
 app.use(express.json());
 app.use('/api', router);

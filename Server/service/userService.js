@@ -8,16 +8,16 @@ const ApiError = require("../exceptions/api-errors")
 
 
 class userService {
-    async registration(email, password) {
+    async registration(email, password, role) {
         const uniqUser = await userModel.findOne({email})
         if (uniqUser) {
             throw ApiError.BadRequest(`Пользовательс имейлом ${email}, уже существует!`)
         }
-        const activationLink = uuid.v4();
+        //const activationLink = uuid.v4();
         const hashPass = await bcrypt.hash(password, 3)
 
-        const user = await userModel.create({email, password: hashPass, activationLink})
-        await mailService.sendActivationMail(email, activationLink);
+        const user = await userModel.create({email, password: hashPass, role})
+        //await mailService.sendActivationMail(email, activationLink);
 
         const userDto = new UserDto(user);//email,id,isActivated
         const tokens = tokenService.genToken({...userDto});
@@ -60,10 +60,12 @@ class userService {
         if (!refreshToken) {
             throw ApiError.UnathorizedError()
         }
+        const userData = tokenService.validateRefreshToken(refreshToken);
         const tokenFromDb = tokenService.findToken(refreshToken);
-        if (!tokenFromDb) {
+        if (!tokenFromDb || !userData) {
             throw ApiError.UnathorizedError()
         }
+        const user = await userModel.findById(userData.id)
         const userDto = new UserDto(user);
         const tokens = tokenService.genToken({...userDto});
         await tokenService.saveToken(userDto.id, tokens.refreshToken);
@@ -74,8 +76,9 @@ class userService {
 
 
     }
-    async getUsers(){
-        const users=await userModel.find();
+
+    async getUsers() {
+        const users = await userModel.find();
         return users
     }
 }
