@@ -4,24 +4,23 @@ import axios from "axios";
 import {API_URL} from "../http";
 
 export default class Store {
-    isAuth = false;
-    user: ''
 
     constructor() {
+        this._isAuth = false;
+        this._user = {}
         makeAutoObservable(this)
 
     }
 
     setAuth(bool) {
-        this.isAuth = bool;
+        this._isAuth = bool;
     }
 
     setUser(user) {
-        this.user = user;
+        this._user = user;
     }
 
     async login(email: string, password: string) {
-        debugger
         try {
             debugger
             const res = await AuthService.login(email, password);

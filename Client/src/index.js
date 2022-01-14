@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import Store from "./store/store";
+import {BrowserRouter} from "react-router-dom";
 
 const store = new Store();
 
@@ -10,8 +11,10 @@ const store = new Store();
 export const Context = createContext({store})
 
 ReactDOM.render(
-    <Context.Provider value={{store}}>
-        <App/>
-    </Context.Provider>,
+    <BrowserRouter>
+        <Context.Provider value={{store}}>
+            <App/>
+        </Context.Provider>
+    </BrowserRouter>,
     document.getElementById('root')
 );
