@@ -3,7 +3,7 @@ import api from "../http";
 export default class AuthService {
 
     static async login(email, password) {
-        return api.post('/login', {email, password}).then(response => response.data)
+        return api.post('/login', {email, password,role:"USER"}).then(response => response.data)
     }
 
     static async registration(email, password) {
