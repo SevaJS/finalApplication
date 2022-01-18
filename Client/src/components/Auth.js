@@ -4,12 +4,12 @@ import {observer} from "mobx-react-lite";
 import {Form} from 'react-bootstrap'
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
-import {NavLink, useHistory, useLocation} from "react-router-dom";
-import {DEFAULT_ROUTE, LOGIN_ROUTE, REGISTER_ROUTE} from "../utils/consts";
+import {NavLink, useLocation, useNavigate} from "react-router-dom";
+import {LOGIN_ROUTE, REGISTER_ROUTE} from "../utils/consts";
 
 const Auth = () => {
 
-    const history = useHistory();
+    const history = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const {store} = useContext(Context)
@@ -17,13 +17,28 @@ const Auth = () => {
     const isLogin = location.pathname === LOGIN_ROUTE;
 
     async function login() {
-        await store.login(email, password);
-        history.push(DEFAULT_ROUTE)
+        try {
+            await store.login(email, password);
+            history("/collections")
+
+        } catch (e) {
+            console.log(e)
+
+        }
+
 
     }
+
     async function register() {
-        await store.register(email, password);
-        history.push(DEFAULT_ROUTE)
+        try {
+            await store.register(email, password);
+            history('/collections')
+
+        } catch (e) {
+            console.log(e)
+
+        }
+
 
     }
 

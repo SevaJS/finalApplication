@@ -5,7 +5,7 @@ const Collection = new Schema({
     author: {type: String,required: true },
     theme: {type: String, required: true},
     description: {type: String,required: true},
-    picture: {type: String}
+    picture: {type: String,}
 
 })
 module.exports = model("Collection", Collection)

@@ -51,9 +51,10 @@ class collectionControllers {
         }
     }
 
-    async getOneColl(req, res, next) {
+    async getOneColl(req, res, next) {debugger
         try {
             const coll = await collectionService.getOneColl(req.params.id)
+            console.log(coll)
             return res.json(coll);
 
         } catch (e) {

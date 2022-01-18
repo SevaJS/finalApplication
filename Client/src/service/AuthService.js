@@ -1,9 +1,9 @@
-import api from "../http";
+import {api} from "../http";
 
 export default class AuthService {
 
-    static async login(email, password) {
-        return api.post('/login', {email, password,role:"USER"}).then(response => response.data)
+    static async login(email, password) {debugger
+        return api.post('/login', {email, password, role: "USER"}).then(response => response.data)
     }
 
     static async registration(email, password) {

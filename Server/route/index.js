@@ -14,9 +14,10 @@ router.post('/login', userController.login);
 router.post('/logout', userController.logout);
 router.get('/refresh', userController.refresh);
 router.get('/activate/:link', userController.activateAcc);
-router.get('/users', authMiddle, userController.getUsers);
+router.get('/users', checkRoleMiddle("ADMIN"), userController.getUsers);
 router.post('/collections', checkRoleMiddle("ADMIN"), collectionControllers.createColl)
 router.get('/collections', collectionControllers.getAllColl)
+router.get('/collections/:id', collectionControllers.getOneColl)
 router.put('/collections/:id', collectionControllers.editColl)
 router.delete('/collections/:id', collectionControllers.dellColl)
 

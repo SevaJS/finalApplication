@@ -1,27 +1,33 @@
-import React, {useContext} from 'react';
-import {Context} from "../index";
-import {authRoutes, publicRoutes} from "../http/routes";
-import {Redirect, Route, Switch} from "react-router-dom";
+import React from 'react';
+import {Route, Routes} from "react-router-dom";
+import Auth from "./Auth";
+import Admin from "../pages/Admin";
+import Collections from "../pages/Collections";
+import CollItem from "./CollItem";
+import ItemPage from "../pages/ItemPage";
 
 
-const AppRouter = () => {debugger
+const AppRouter = () => {
 
-    const {store} = useContext(Context)
+    /*
+        const {store} = useContext(Context)
+    */
 
 
     return (
 
         <div>
 
-            <Switch>
-                {publicRoutes.map(({path, Component}) =>
-                    <Route key={path} path={path} component={Component} exact/>
-                )}
-                {store._isAuth && authRoutes.map(({path, Component}) =>
-                    <Route key={path} path={path} component={Component} exact/>
-                )}
-                <Redirect to={'/'}/>
-            </Switch>
+            <Routes>
+                <Route path={"/"}>
+                    <Route path="/admin" element={<Admin/>}/>
+                    <Route path="/login" element={<Auth/>}/>
+                    <Route path="/registration" element={<Auth/>}/>
+                    <Route path="/collections" element={<Collections/>}/>
+                    <Route path="/collections/:id" element={<ItemPage/>}/>
+                </Route>
+
+            </Routes>
 
         </div>
     );

@@ -7,6 +7,10 @@ const api = axios.create({
     withCredentials: true,
     baseURL: API_URL
 })
+const adminApi = axios.create({
+    baseURL: API_URL,
+    withCredentials: true,
+})
 
 
 api.interceptors.request.use((config) => {
@@ -15,4 +19,4 @@ api.interceptors.request.use((config) => {
 })
 
 
-export default api;
+export { api,adminApi};

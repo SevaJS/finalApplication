@@ -1,7 +1,8 @@
 import Admin from "../pages/Admin"
-import {ADMIN_ROUTE, COLLECTION_ROUTE, DEFAULT_ROUTE, LOGIN_ROUTE, REGISTER_ROUTE} from "../utils/consts";
-import CollItem from "../pages/CollItem";
+import {ADMIN_ROUTE, DEFAULT_ROUTE, LOGIN_ROUTE, REGISTER_ROUTE} from "../utils/consts";
+import Collections from "../pages/Collections";
 import Auth from "../components/Auth";
+import CollItem from "../components/CollItem";
 
 export const authRoutes = [
     {
@@ -27,11 +28,11 @@ export const publicRoutes = [
     {
 
         path: DEFAULT_ROUTE,
-        Component: CollItem
+        Component: Collections
     },
     {
 
-        path: COLLECTION_ROUTE + '/:id',
+        path: '/collections' + '/:id',
         Component: CollItem
     }
 

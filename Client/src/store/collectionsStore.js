@@ -1,45 +1,12 @@
 import {makeAutoObservable} from "mobx";
+import CollectionService from "../service/CollectionService";
+import UserService from "../service/UserService";
 
 export default class collectionsStore {
 
     constructor() {
         this._selectedType = {}
-        this._collections = [
-            {
-                id: '1',
-                title: "PIVO",
-                author: "SEVA",
-                theme: "PIVOO",
-                description: "ETOT POST O PIVE",
-                picture: ''
-            },
-            {
-                id: '2',
-                title: "PIVO",
-                author: "SEVA",
-                theme: "PIVOO",
-                description: "ETOT POST O PIVE",
-                picture: ''
-            },
-            {
-                id: '3',
-                title: "PIVO",
-                author: "SEVA",
-                theme: "PIVOO",
-                description: "ETOT POST O PIVE",
-                picture: ''
-            },
-            {
-                id: '4',
-                title: "PIVO",
-                author: "SEVA",
-                theme: "PIVOO",
-                description: "ETOT POST O PIVE",
-                picture: ''
-            }
-
-
-        ]
+        this.item = []
         this.collTypes = [
             {id: 1, name: 'PIVO'},
             {id: 2, name: 'BOOKS'},
@@ -52,6 +19,10 @@ export default class collectionsStore {
         makeAutoObservable(this)
     }
 
+    setItems(item) {
+        this.item = item
+    }
+
 
     setSelectedType(type) {
         this._selectedType = type;
@@ -60,6 +31,50 @@ export default class collectionsStore {
 
     get selectedType() {
         return this._selectedType
+
+    }
+
+    async getItems() {
+        try {
+            const res = await CollectionService.getItems();
+            console.log(res)
+            return res;
+
+
+        } catch (e) {
+            alert(e.response.data.message);
+
+        }
+
+    }
+
+    async getItem(id) {
+        try {
+            debugger
+            const res = await CollectionService.getItem(id);
+            console.log(res)
+            return res;
+
+
+        } catch (e) {
+            alert(e.response.data.message);
+
+        }
+
+    }
+
+    async getUsers() {
+        try {
+            debugger
+            const res = await UserService.getUsers();
+            console.log(res)
+            return res;
+
+
+        } catch (e) {
+            alert(e.response.data.message);
+
+        }
 
     }
 

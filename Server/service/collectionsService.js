@@ -20,10 +20,10 @@ class CollectionsService {
 
     async dellColl(id) {
         try {
-            const coll=Collection.findByIdAndDelete(id);
+            const coll = Collection.findByIdAndDelete(id);
             return coll;
 
-        }catch (e) {
+        } catch (e) {
 
         }
     }
@@ -38,10 +38,12 @@ class CollectionsService {
         }
     }
 
-    async getOneColl() {
+    async getOneColl(id) {
         try {
-
+            const item = await Collection.findById(id);
+            return item
         } catch (e) {
+
 
         }
     }
