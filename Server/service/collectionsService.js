@@ -1,20 +1,17 @@
 const Collection = require("../models/collectionModels.js")
-
 const collectionDto = require("../dtos/collectionsDto")
-const ApiError = require("../exceptions/api-errors")
 
 
 class CollectionsService {
 
 
-    async createColl(title, theme, author, description) {
+    async createColl(title, theme, author, description, img) {
 
 
-        const col = await Collection.create({title, theme, author, description})
+        const col = await Collection.create({title, theme, author, description, img})
         const collDto = new collectionDto(col);
-        return (
-            collDto
-        )
+        return collDto
+
 
     }
 

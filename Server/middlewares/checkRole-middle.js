@@ -12,11 +12,11 @@ module.exports = function (role) {
             }
             const accessToken = authHeader.split(' ')[1];
             if (!accessToken) {
-                return next(ApiError.UnathorizedError())
+                return next(ApiError.UnathorizedErrorr())
             }
             const userData = tokenServes.findToken(accessToken);
             if (!userData) {
-                return next(ApiError.UnathorizedError())
+                return next(ApiError.UnathorizedErrorrr())
             }
             const decoded = jwt.verify(accessToken, process.env.JWT_ACCESS_SECRET_TOKEN)
 

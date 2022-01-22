@@ -3,11 +3,21 @@ import {Nav, Navbar} from 'react-bootstrap'
 import Container from "react-bootstrap/Container";
 import {Context} from "../index";
 import {observer} from "mobx-react-lite";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {USER_ROUTE} from "../utils/consts";
+import Button from "react-bootstrap/Button";
 
 
 const NavBar = () => {
     const {store} = useContext(Context)
+    console.log(store)
+
+    async function click() {debugger
+        history(USER_ROUTE + '/' + store._user.id)
+
+    }
+
+    const history = useNavigate();
 
     return (
         <div>
@@ -35,7 +45,7 @@ const NavBar = () => {
                     }
                     {store._isAuth ?
                         <Nav>
-                            <Nav.Link as={Link} to="/collections">MY PAGE</Nav.Link>
+                            <Button onClick={() => click()}>MY PAGE</Button>
                             <Nav.Link as={Link} to="/collections" className="align-item-right"
                                       onClick={() => store.logout()}>LOGOUT</Nav.Link>
                         </Nav>

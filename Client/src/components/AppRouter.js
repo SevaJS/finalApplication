@@ -3,8 +3,8 @@ import {Route, Routes} from "react-router-dom";
 import Auth from "./Auth";
 import Admin from "../pages/Admin";
 import Collections from "../pages/Collections";
-import CollItem from "./CollItem";
 import ItemPage from "../pages/ItemPage";
+import UserPage from "../pages/UserPage";
 
 
 const AppRouter = () => {
@@ -25,6 +25,8 @@ const AppRouter = () => {
                     <Route path="/registration" element={<Auth/>}/>
                     <Route path="/collections" element={<Collections/>}/>
                     <Route path="/collections/:id" element={<ItemPage/>}/>
+                    <Route path="/users/:id" element={<UserPage/>}/>
+
                 </Route>
 
             </Routes>

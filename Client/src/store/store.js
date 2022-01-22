@@ -29,7 +29,6 @@ export default class Store {
             this.setUser(res.user)
 
         } catch (e) {
-            debugger
             alert(e.response.data.message);
 
         }
@@ -51,7 +50,6 @@ export default class Store {
     }
 
     async logout() {
-        debugger
         try {
             this.setAuth(false);
             const res = await AuthService.logout();
@@ -67,10 +65,10 @@ export default class Store {
 
     async checkAuth() {
         try {
-
             const res = await axios.get(`${API_URL}/refresh`, {withCredentials: true});
-            console.log(res.data)
-            localStorage.setItem('token', res.accessToken);
+            console.log(res.data.accessToken)
+            localStorage.setItem('token', res.data.accessToken);
+            console.log(localStorage)
             this.setUser(res.data.user)
             this.setAuth(true);
             return res

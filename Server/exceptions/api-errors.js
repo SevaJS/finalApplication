@@ -17,6 +17,14 @@ module.exports = class ApiError extends Error {
         return new ApiError(401, "Пользователь не автаризован!")
 
     }
+    static UnathorizedErrorr() {
+        return new ApiError(401, "Пользователь нyе автаризован!")
+
+    }
+    static UnathorizedErrorrr() {
+        return new ApiError(401, "Пользователь нyeе автаризован!")
+
+    }
     static noAccess(data) {
         return new ApiError(403, data.value())
 

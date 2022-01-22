@@ -13,12 +13,8 @@ class userService {
         if (uniqUser) {
             throw ApiError.BadRequest(`Пользовательс имейлом ${email}, уже существует!`)
         }
-        //const activationLink = uuid.v4();
         const hashPass = await bcrypt.hash(password, 3)
-
         const user = await userModel.create({email, password: hashPass, role})
-        //await mailService.sendActivationMail(email, activationLink);
-
         const userDto = new UserDto(user);//email,id,isActivated
         const tokens = tokenService.genToken({...userDto});
         await tokenService.saveToken(userDto.id, tokens.refreshToken);
@@ -56,7 +52,8 @@ class userService {
 
     }
 
-    async refresh(refreshToken) {debugger
+    async refresh(refreshToken) {
+        debugger
         if (!refreshToken) {
             throw ApiError.UnathorizedError()
         }
@@ -77,9 +74,25 @@ class userService {
 
     }
 
+    async dellUser(id) {
+        try {
+            console.log(id)
+            const user = userModel.findByIdAndDelete(id);
+            return user;
+
+        } catch (e) {
+
+        }
+    }
+
     async getUsers() {
         const users = await userModel.find();
         return users
+    }
+
+    async getUser(id) {
+        const user = await userModel.findById(id);
+        return user
     }
 }
 

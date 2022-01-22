@@ -1,5 +1,7 @@
 const collectionService = require("../service/collectionsService")
-
+const uuid = require('uuid');
+const path = require("path")
+let fs = require('fs');
 
 class collectionControllers {
 
@@ -7,7 +9,8 @@ class collectionControllers {
     async createColl(req, res, next) {
         try {
 
-            const {title, theme, author, description} = req.body
+            const {title, theme, author, description,IMG} = req.body
+            console.log(req.body)
             const collData = await collectionService.createColl(title, theme, author, description);
             return res.json(collData);
 
@@ -51,10 +54,10 @@ class collectionControllers {
         }
     }
 
-    async getOneColl(req, res, next) {debugger
+    async getOneColl(req, res, next) {
+        debugger
         try {
             const coll = await collectionService.getOneColl(req.params.id)
-            console.log(coll)
             return res.json(coll);
 
         } catch (e) {

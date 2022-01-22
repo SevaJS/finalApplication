@@ -68,10 +68,32 @@ class userControllers {
         }
     }
 
+    async dellUsers(req, res, next) {
+        try {
+            const {id} = req.body;
+            console.log(req.body)
+            const user = await userService.dellUser(id)
+            return res.json(user)
+
+        } catch (e) {
+            next(e);
+        }
+    }
+
     async getUsers(req, res, next) {
         try {
             const users = await userService.getUsers()
             return res.json(users)
+
+        } catch (e) {
+            next(e);
+        }
+    }
+
+    async getUser(req, res, next) {
+        try {
+            const user = await userService.getUser(req.params.id)
+            return res.json(user)
 
         } catch (e) {
             next(e);

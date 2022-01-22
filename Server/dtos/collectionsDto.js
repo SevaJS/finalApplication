@@ -4,6 +4,7 @@ module.exports = class collectionDto {
     theme;
     description;
     id;
+    picture;
 
     constructor(model) {
         this.title = model.title;
@@ -11,5 +12,6 @@ module.exports = class collectionDto {
         this.author = model.author;
         this.theme = model.theme;
         this.description = model.description;
+        this.picture = model.picture
     }
 }

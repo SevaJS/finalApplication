@@ -31,6 +31,7 @@ const Auth = () => {
 
     async function register() {
         try {
+
             await store.register(email, password);
             history('/collections')
 

@@ -4,6 +4,7 @@ const cors = require("cors")
 const cookeParser = require("cookie-parser")
 const mongoose = require("mongoose")
 const router = require("./route/index")
+const fileUpload = require("express-fileupload")
 const app = express();
 const PORT = process.env.PORT;
 const errorMiddle = require("./middlewares/error-middle")
@@ -17,6 +18,7 @@ app.use(cors({
 app.use(cookeParser());
 app.use(express.json());
 app.use('/api', router);
+app.use(fileUpload({}));
 app.use(errorMiddle);
 
 
