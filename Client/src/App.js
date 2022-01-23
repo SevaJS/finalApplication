@@ -10,7 +10,6 @@ const App = () => {
     const {collections} = useContext(Context)
     const {store} = useContext(Context)
     useEffect(() => {
-        debugger
         collections.getItems()
         if (localStorage.getItem('token')) {
             store.checkAuth()

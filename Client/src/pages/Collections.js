@@ -12,7 +12,6 @@ const Collections = () => {
 
 
     useEffect((() => {
-            collections.getItems().then(items => collections.setItems(items))
             collections.getTypes().then(types => collections.setTypes(types))
         }
     ), [0])

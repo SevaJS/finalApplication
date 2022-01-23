@@ -5,14 +5,15 @@ const collectionDto = require("../dtos/collectionsDto")
 class CollectionsService {
 
 
-    async createColl(title, theme, author, description, img) {
+    async createColl({title, theme, author, description, img}) {
+        try {
+            const col = await Collection.create({title, theme, author, description, img})
+            const collDto = new collectionDto(col);
+            return collDto
+        } catch (e) {
+            console.log(e)
 
-
-        const col = await Collection.create({title, theme, author, description, img})
-        const collDto = new collectionDto(col);
-        return collDto
-
-
+        }
     }
 
     async dellColl(id) {

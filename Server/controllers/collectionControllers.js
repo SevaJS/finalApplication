@@ -9,9 +9,10 @@ class collectionControllers {
     async createColl(req, res, next) {
         try {
 
-            const {title, theme, author, description,IMG} = req.body
+            const {title, theme, author, description, img} = req.body
             console.log(req.body)
-            const collData = await collectionService.createColl(title, theme, author, description);
+            console.log(req.file)
+            const collData = await collectionService.createColl({title, theme, author, description, img});
             return res.json(collData);
 
 
@@ -22,8 +23,9 @@ class collectionControllers {
 
     async dellColl(req, res, next) {
         try {
-
-            const coll = await collectionService.dellColl(req.params.id)
+            const {id} = req.body;
+            console.log(id)
+            const coll = await collectionService.dellColl(id)
             return res.json(coll);
 
 

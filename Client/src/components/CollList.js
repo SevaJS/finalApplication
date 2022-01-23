@@ -4,17 +4,20 @@ import {Context} from "../index";
 import Row from "react-bootstrap/Row";
 import CollItem from "./CollItem";
 
-const CollList = () => {
+const CollList = observer(() => {
     const {collections} = useContext(Context)
 
+
     return (
-        <Row className="d-flex ">
-            {collections.item.map(item =>
-                <CollItem key={item.id} item={item}/>
-            )}
 
-        </Row>
+        <div>
+            <Row className="d-flex ">
+                {collections.item.map(item =>
+                    <CollItem key={item.id} item={item}/>
+                )}
+            </Row>
+        </div>
     );
-};
+});
 
-export default observer(CollList);
+export default CollList;

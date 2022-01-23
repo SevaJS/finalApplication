@@ -14,6 +14,7 @@ ReactDOM.render(
         <Context.Provider value={{
             store: new store(),
             collections: new collectionsStore()
+
         }}>
             <App/>
         </Context.Provider>

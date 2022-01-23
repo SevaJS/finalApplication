@@ -19,8 +19,6 @@ const UserList = ({users}) => {
 
     }
 
-    console.log(collections.users)
-
     return (
         <div>
             {users.map((user) => {

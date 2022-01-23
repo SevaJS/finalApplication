@@ -1,21 +1,10 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React from 'react';
 import {Card, Container} from "react-bootstrap";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
-import {Context} from "../index";
-import {useParams} from "react-router-dom";
 
-const ItemPage = () => {
-    const {collections} = useContext(Context);
-    const [item, setItem] = useState({info: []});
-    const {id} = useParams()
-
-    useEffect((() => {
-            collections.getItem(id).then(item => setItem(item))
-        }
-    ), [0])
-
+const CollectionItemHeader = ({item}) => {
     return (
         <Container className={"mt-5"}>
             <Card style={{borderRadius: 10}} className={"p-3"}>
@@ -55,4 +44,4 @@ const ItemPage = () => {
     );
 };
 
-export default ItemPage;
+export default CollectionItemHeader;

@@ -24,7 +24,7 @@ router.get('/types', typeControllers.getTypes)
 router.get('/collections', collectionControllers.getAllColl)
 router.get('/collections/:id', collectionControllers.getOneColl)
 router.put('/collections/:id', collectionControllers.editColl)
-router.delete('/collections/:id', collectionControllers.dellColl)
+router.post('/collections/del', checkRoleMiddle("ADMIN"), collectionControllers.dellColl)
 
 
 module.exports = router;

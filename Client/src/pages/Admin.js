@@ -10,7 +10,7 @@ import CreateType from "../components/modals/CreateType";
 import CollectionItemList from "../adminComponents/CollectionItemLIst";
 import {observer} from "mobx-react-lite";
 
-const Admin = () => {
+const Admin = observer(() => {
     const [collVisible, setCollVisible] = useState(false);
     const [typeVisible, setTypeVisible] = useState(false);
     const [key, setKey] = useState('home');
@@ -19,11 +19,11 @@ const Admin = () => {
     const [users, setUsers] = useState("")
 
     useEffect((() => {
-            collections.getUsers().then(item => setUsers(item))
-            collections.getItems().then(item => setItems(item))
+            collections.getUsers().then(item => collections.setUsers(item))
+            collections.getItems().then(item => collections.setItems(item))
 
         }
-    ), [])
+    ), [0])
     return (
         <Container className='d-flex flex-column'>
             <Button variant={'outline-dark'} className="mt-2">Пользователи</Button>
@@ -64,6 +64,6 @@ const Admin = () => {
 
         </Container>
     );
-};
+});
 
-export default observer(Admin);
+export default Admin;

@@ -1,14 +1,22 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import Card from "react-bootstrap/Card";
 import {Container} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import {COLLECTION_ROUTE} from "../utils/consts";
 import {observer} from "mobx-react-lite";
+import {Context} from "../index";
 
 
 const CollectionItemList = observer(({items}) => {
     const history = useNavigate();
+    const {collections} = useContext(Context);
+
+    async function delColl(id) {
+        debugger
+        await collections.dellColl(id)
+
+    }
 
     return (
         <div>
@@ -24,7 +32,9 @@ const CollectionItemList = observer(({items}) => {
                                 <Button onClick={() => {
                                     history(COLLECTION_ROUTE + '/' + item._id)
                                 }}>Card Link</Button>
-                                <Card.Link href="#">Another Link</Card.Link>
+                                <Button className="m-2" onClick={() => {
+                                    delColl(item._id)
+                                }}>Delete collections</Button>
                             </Card.Body>
 
                         </Card>

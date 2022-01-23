@@ -10,9 +10,9 @@ import Button from "react-bootstrap/Button";
 
 const NavBar = () => {
     const {store} = useContext(Context)
-    console.log(store)
 
-    async function click() {debugger
+    async function click() {
+        debugger
         history(USER_ROUTE + '/' + store._user.id)
 
     }

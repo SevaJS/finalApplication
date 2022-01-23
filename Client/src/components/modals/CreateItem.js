@@ -27,14 +27,15 @@ const CreateItem = ({show, handleClose}) => {
         const author = store._user.id
         const theme = collections.selectedTypeToCreate.type
         const description = desc
-        const picture = file
-        collections.createCollection({title, author, theme, description, picture}).then(data => handleClose)
+        const img = file
+        collections.createCollection({title, author, theme, description, img}).then(handleClose)
 
 
     }
 
     async function f() {
-        await collections.getTypes().then(types => setType(types))
+        debugger
+        await collections.getTypes().then(types => setType(types)).then(collections.getItems())
         setLoading(true)
 
     }

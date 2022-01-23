@@ -1,19 +1,26 @@
-import {makeAutoObservable} from "mobx";
+import {makeAutoObservable, observable} from "mobx";
 import CollectionService from "../service/CollectionService";
 import UserService from "../service/UserService";
 import TypeService from "../service/TypeService";
 
 export default class collectionsStore {
 
+
+    _selectedType = {};
+    typeToCreate = {}
+    item = []
+    collTypes = []
+    users = []
+
     constructor() {
-        debugger
         this._selectedType = {}
         this.typeToCreate = {}
         this.item = []
         this.collTypes = []
         this.users = []
+        console.log(this.item)
 
-        makeAutoObservable(this)
+        makeAutoObservable(this, {item: observable}, {deep: true})
     }
 
     setItems(item) {
@@ -24,21 +31,25 @@ export default class collectionsStore {
         this.users = users
     }
 
-    get getCollItems() {
-        return this.item
-    }
 
     setTypes(type) {
         this.collTypes = type
     }
 
     setSelectedTypeToCreate(type) {
-        debugger
         this.typeToCreate = type
     }
 
     get selectedTypeToCreate() {
         return this.typeToCreate
+    }
+
+    get getItems() {
+        return this.item
+    }
+
+    get getUsers() {
+        return this.users
     }
 
 
@@ -47,6 +58,7 @@ export default class collectionsStore {
 
     }
 
+
     get selectedType() {
         return this._selectedType
 
@@ -54,7 +66,8 @@ export default class collectionsStore {
 
     async getItems() {
         try {
-            const res = await CollectionService.getItems();
+            const res = await CollectionService.getItems()
+            this.setItems(res)
             console.log(res)
             return res;
 
@@ -69,7 +82,6 @@ export default class collectionsStore {
     async getItem(id) {
         try {
             const res = await CollectionService.getItem(id);
-            this.setUsers(res)
             return res;
 
 
@@ -116,6 +128,21 @@ export default class collectionsStore {
             console.log(res)
             return res;
 
+        } catch (e) {
+            alert(e.response.data.message);
+
+        }
+
+    }
+
+    async dellColl(id) {
+        try {
+            debugger
+            const res = await CollectionService.dellColl(id)
+            console.log(res)
+            await this.getItems()
+            return res;
+
 
         } catch (e) {
             alert(e.response.data.message);
@@ -126,9 +153,10 @@ export default class collectionsStore {
 
 
     async createCollection(data) {
+        debugger
         try {
-            debugger
             const res = await CollectionService.createItem(data)
+            this.getItems()
             console.log(res)
             return res;
 
@@ -141,7 +169,6 @@ export default class collectionsStore {
     }
 
     async getTypes() {
-        debugger
         const res = await TypeService.getTypes()
         console.log(res)
         return res

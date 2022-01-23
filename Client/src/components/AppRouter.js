@@ -3,16 +3,11 @@ import {Route, Routes} from "react-router-dom";
 import Auth from "./Auth";
 import Admin from "../pages/Admin";
 import Collections from "../pages/Collections";
-import ItemPage from "../pages/ItemPage";
+import ItemPage from "../pages/CollectionPage";
 import UserPage from "../pages/UserPage";
 
 
 const AppRouter = () => {
-
-    /*
-        const {store} = useContext(Context)
-    */
-
 
     return (
 
