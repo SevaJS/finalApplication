@@ -12,9 +12,10 @@ import {observer} from "mobx-react-lite";
 const CreateItem = ({show, handleClose}) => {
     const {collections} = useContext(Context)
     const {store} = useContext(Context)
+    const {types} = useContext(Context)
     const [name, setName] = useState('')
     const [file, setFile] = useState(null)
-    const [types, setType] = useState('')
+    const [typess, setType] = useState('')
     const [desc, setDescription] = useState('')
     const [isLoading, setLoading] = useState(false)
     useEffect(() => {
@@ -25,7 +26,7 @@ const CreateItem = ({show, handleClose}) => {
     const addItem = () => {
         const title = name
         const author = store._user.id
-        const theme = collections.selectedTypeToCreate.type
+        const theme = types.selectedTypeToCreate.type
         const description = desc
         const img = file
         collections.createCollection({title, author, theme, description, img}).then(handleClose)
@@ -34,8 +35,7 @@ const CreateItem = ({show, handleClose}) => {
     }
 
     async function f() {
-        debugger
-        await collections.getTypes().then(types => setType(types)).then(collections.getItems())
+        await types.getTypes().then(types => setType(types)).then(collections.getItems())
         setLoading(true)
 
     }
@@ -58,11 +58,11 @@ const CreateItem = ({show, handleClose}) => {
                 <Modal.Body>
                     <Form>
                         <Dropdown>
-                            <DropdownToggle>{collections.selectedTypeToCreate.type || "Выберите тип"}</DropdownToggle>
+                            <DropdownToggle>{types.selectedTypeToCreate.type || "Выберите тип"}</DropdownToggle>
                             <DropdownMenu>
                                 {isLoading ?
-                                    types.map(type =>
-                                        <DropdownItem onClick={() => collections.setSelectedTypeToCreate(type)}
+                                    typess.map(type =>
+                                        <DropdownItem onClick={() => types.setSelectedTypeToCreate(type)}
                                                       key={type.id}>
                                             {type.type}
                                         </DropdownItem>

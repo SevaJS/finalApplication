@@ -1,7 +1,4 @@
 const collectionService = require("../service/collectionsService")
-const uuid = require('uuid');
-const path = require("path")
-let fs = require('fs');
 
 class collectionControllers {
 
@@ -10,8 +7,6 @@ class collectionControllers {
         try {
 
             const {title, theme, author, description, img} = req.body
-            console.log(req.body)
-            console.log(req.file)
             const collData = await collectionService.createColl({title, theme, author, description, img});
             return res.json(collData);
 
@@ -24,7 +19,6 @@ class collectionControllers {
     async dellColl(req, res, next) {
         try {
             const {id} = req.body;
-            console.log(id)
             const coll = await collectionService.dellColl(id)
             return res.json(coll);
 
@@ -35,8 +29,12 @@ class collectionControllers {
         }
     }
 
-    async editColl(req, res, next) {
+    async editCollDependence(req, res, next) {
         try {
+            const {id} = req.body;
+            console.log(id)
+            const coll = await collectionService.editCollDependence(id)
+            return res.json(coll);
 
         } catch (e) {
             next(e);
@@ -60,6 +58,20 @@ class collectionControllers {
         debugger
         try {
             const coll = await collectionService.getOneColl(req.params.id)
+            return res.json(coll);
+
+        } catch (e) {
+            next(e);
+
+        }
+    }
+    async getUsersColls(req, res, next) {
+        debugger
+        try {
+            const {id} = req.body;
+            console.log(id)
+            const coll = await collectionService.getUsersColls(id)
+            console.log(coll)
             return res.json(coll);
 
         } catch (e) {

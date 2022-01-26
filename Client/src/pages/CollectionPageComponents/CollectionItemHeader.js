@@ -1,10 +1,21 @@
-import React from 'react';
-import {Card, Container} from "react-bootstrap";
+import React, {useContext, useState} from 'react';
+import {Button, Card, Container} from "react-bootstrap";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
+import {Context} from "../../index";
 
-const CollectionItemHeader = ({item}) => {
+const CollectionItemHeader = ({item, id}) => {
+    const [title, setTitle] = useState('')
+    const [description, setDescription] = useState('')
+    const {items} = useContext(Context)
+
+    function f(title, description) {
+        debugger
+        items.createCollItem({title, description}, id).then(res=>res)
+
+    }
+
     return (
         <Container className={"mt-5"}>
             <Card style={{borderRadius: 10}} className={"p-3"}>
@@ -39,6 +50,15 @@ const CollectionItemHeader = ({item}) => {
                         </Col>
                     </Row>
                 </Row>
+                <Button onClick={() => f(title, description)}>ADD ITEM</Button>
+                <input
+                    value={title}
+                    onChange={(e => setTitle(e.target.value))}
+                />
+                <input
+                    value={description}
+                    onChange={(e => setDescription(e.target.value))}
+                />
             </Card>
         </Container>
     );

@@ -19,8 +19,8 @@ const Admin = observer(() => {
     const [users, setUsers] = useState("")
 
     useEffect((() => {
-            collections.getUsers().then(item => collections.setUsers(item))
-            collections.getItems().then(item => collections.setItems(item))
+            collections.getUsers().then(item => setUsers(item))
+            collections.getItems().then(item => setItems(item))
 
         }
     ), [0])
@@ -41,8 +41,11 @@ const Admin = observer(() => {
             >
                 <Tab eventKey="home" title="Users">
                     {users ?
-
-                        <UserList users={users}/>
+                        <div>
+                            {collections.users.map(item =>
+                                <UserList user={item}/>
+                            )}
+                        </div>
                         :
                         <div>LOADING</div>
 
@@ -50,8 +53,11 @@ const Admin = observer(() => {
                 </Tab>
                 <Tab eventKey="profile" title="Collections">
                     {items ?
-
-                        <CollectionItemList items={items}/>
+                        <div>
+                            {collections.item.map(item =>
+                                <CollectionItemList item={item}/>
+                            )}
+                        </div>
                         :
                         <div>LOADING</div>
 

@@ -7,8 +7,9 @@ import {Context} from "../../index";
 const CreateType = ({show, handleClose}) => {
     const [type, setType] = useState('')
     const {collections} = useContext(Context)
+    const {types} = useContext(Context)
     const addType = () => {
-        collections.createType({type: type}).then(data => {
+        types.createType({type: type}).then(data => {
             setType('')
             handleClose()
         })

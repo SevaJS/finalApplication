@@ -3,7 +3,7 @@ import AuthService from "../service/AuthService";
 import axios from "axios";
 import {API_URL} from "../http";
 
-export default class Store {
+export default class UserStore {
 
     constructor() {
         this._isAuth = false;

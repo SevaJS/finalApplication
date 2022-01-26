@@ -7,18 +7,18 @@ import CreateItem from "./modals/CreateItem";
 
 const TypeBar = observer(() => {
     const [show, setShow] = useState(false);
-    const {collections} = useContext(Context)
     const {store} = useContext(Context)
+    const {types} = useContext(Context)
 
 
     return (
         <ListGroup>
-            {collections.collTypes.map(type =>
+            {types.collTypes.map((type) =>
                 <ListGroup.Item
-                    key={type._id}
+                    key={type.id}
                     style={{cursor: 'pointer'}}
-                    onClick={() => collections.setSelectedType(type)}
-                    active={type._id === collections.selectedType._id}
+                    onClick={() => types.setSelectedType(type)}
+                    active={type._id === types.selectedType._id}
 
                 >
                     {type.type}

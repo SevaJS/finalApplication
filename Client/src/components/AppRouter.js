@@ -5,6 +5,7 @@ import Admin from "../pages/Admin";
 import Collections from "../pages/Collections";
 import ItemPage from "../pages/CollectionPage";
 import UserPage from "../pages/UserPage";
+import CollectionItemPage from "../pages/CollectionItemPage";
 
 
 const AppRouter = () => {
@@ -20,6 +21,7 @@ const AppRouter = () => {
                     <Route path="/registration" element={<Auth/>}/>
                     <Route path="/collections" element={<Collections/>}/>
                     <Route path="/collections/:id" element={<ItemPage/>}/>
+                    <Route path="/collectionItem/:id" element={<CollectionItemPage/>}/>
                     <Route path="/users/:id" element={<UserPage/>}/>
 
                 </Route>

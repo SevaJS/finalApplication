@@ -3,25 +3,54 @@ import {Context} from "../index";
 import {useParams} from "react-router-dom";
 import CollectionItemHeader from "./CollectionPageComponents/CollectionItemHeader";
 import CollectionItems from "./CollectionPageComponents/CollectionItems";
-import {Container} from "react-bootstrap";
+import {Card} from "react-bootstrap";
 import CollectionComments from "./CollectionPageComponents/CollectionComments";
+import Row from "react-bootstrap/Row";
+import Container from "react-bootstrap/Container";
 
 const CollectionPage = () => {
     const {collections} = useContext(Context);
     const [item, setItem] = useState({info: []});
+    const [loading, setIsLoading] = useState(false);
     const {id} = useParams()
 
-    useEffect((() => {
-            collections.getItem(id).then(item => setItem(item))
-        }
-    ), [0])
+    useEffect(() =>
+        f(), [0])
+
+    async function f() {
+        await collections.getItem(id).then(res => setItem(res))
+        setIsLoading(true)
+
+
+    }
 
     return (
-        <Container>
-            <CollectionItemHeader item={item}/>
-            <CollectionItems/>
-            <CollectionComments/>
-        </Container>
+        <Container style={{border: "black"}}>
+            {loading ?
+                <Card>
+                    <CollectionItemHeader
+                        item={item}
+                        id={id}
+                    />
+                    <Row className="d-flex m-4  ">
+
+                        {item.items.map(item => {
+                            return (
+                                <CollectionItems
+                                    item={item}
+                                    refresh={f}
+                                />
+                            )
+
+                        })
+                        }
+                    </Row>
+                    <CollectionComments/>
+                </Card>
+                : "LOADING"
+            }</Container>
+
+
     );
 
 };

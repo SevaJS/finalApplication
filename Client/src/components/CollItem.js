@@ -6,6 +6,7 @@ import {COLLECTION_ROUTE} from "../utils/consts";
 
 
 const CollItem = ({item}) => {
+
     async function click() {
         history(COLLECTION_ROUTE + '/' + item._id);
 
@@ -18,6 +19,7 @@ const CollItem = ({item}) => {
             <Card style={{width: 150, cursor: "pointer"}} border={"light"}>
                 <Image width={150} height={150} src={item.picture}/>
                 {item.title}
+                <div>BY:{item.author}</div>
             </Card>
 
         </Col>

@@ -38,10 +38,35 @@ class CollectionsService {
 
     async getOneColl(id) {
         try {
+            debugger
             const item = await Collection.findById(id);
+            console.log(item)
             return item
         } catch (e) {
 
+
+        }
+    }
+
+    async editCollDependence(id, data) {
+        try {
+            const coll = await Collection.findByIdAndUpdate(id, {$push: {items: data}})
+            console.log(coll)
+            return coll;
+
+        } catch (e) {
+
+        }
+    }
+
+    async getUsersColls(id) {
+        try {
+            console.log(id)
+            const coll = await Collection.find({author: id})
+            console.log(coll)
+            return coll;
+
+        } catch (e) {
 
         }
     }

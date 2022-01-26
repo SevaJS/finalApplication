@@ -3,7 +3,7 @@ const tokenServes = require("../service/tokenService")
 const userServes = require("../service/userService")
 const jwt = require("jsonwebtoken");
 
-module.exports = function (role) {
+module.exports = function () {
     return function (req, res, next) {
         try {
             const authHeader = req.headers.authorization;
@@ -19,8 +19,9 @@ module.exports = function (role) {
                 return next(ApiError.UnathorizedErrorrr())
             }
             const decoded = jwt.verify(accessToken, process.env.JWT_ACCESS_SECRET_TOKEN)
+            console.log(decoded.role)
 
-            if (decoded.role !== role) {
+            if (decoded.role !== "ADMIN" & decoded.role !== "USER") {
                 return next(ApiError.noAccess(userData))
             }
             req.user = userData;

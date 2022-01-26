@@ -1,7 +1,6 @@
 const userModel = require('../models/userModels')
 const bcrypt = require("bcrypt")
 const uuid = require("uuid")
-const mailService = require("../service/mailService")
 const tokenService = require("../service/tokenService")
 const UserDto = require("../dtos/usersDto")
 const ApiError = require("../exceptions/api-errors")

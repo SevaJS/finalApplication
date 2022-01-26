@@ -17,7 +17,7 @@ api.interceptors.request.use((config) => {
 
 /*
 const authInterceptor = config => {debugger
-    config.headers.authorization = `Bearer${localStorage.getItem("token")}`
+    config.headers.authorization = `Bearer${localStorage.getCollection("token")}`
     return config;
 */
 

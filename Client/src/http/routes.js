@@ -30,11 +30,11 @@ export const publicRoutes = [
         path: DEFAULT_ROUTE,
         Component: Collections
     },
-    {
+    /*{
 
         path: '/collections' + '/:id',
         Component: CollItem
-    }
+    }*/
 
 
 ]

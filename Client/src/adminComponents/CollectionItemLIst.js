@@ -8,43 +8,39 @@ import {observer} from "mobx-react-lite";
 import {Context} from "../index";
 
 
-const CollectionItemList = observer(({items}) => {
+const CollectionItemList = observer(({item}) => {
     const history = useNavigate();
     const {collections} = useContext(Context);
 
     async function delColl(id) {
-        debugger
         await collections.dellColl(id)
 
     }
 
     return (
         <div>
-            {items.map((item) => {
-                return (
-                    <Container key={item._id}>
-                        <Card className="m-2">
-                            <Card.Body>
-                                <div>ID:{item._id}</div>
-                                <div>AUTHOR:{item.author}</div>
-                                <div>TITLE:{item.title}</div>
-                                <div>THEME:{item.theme}</div>
-                                <Button onClick={() => {
-                                    history(COLLECTION_ROUTE + '/' + item._id)
-                                }}>Card Link</Button>
-                                <Button className="m-2" onClick={() => {
-                                    delColl(item._id)
-                                }}>Delete collections</Button>
-                            </Card.Body>
+            <Container>
+                <Card className="m-2">
+                    <Card.Body>
+                        <div>ID:{item._id}</div>
+                        <div>AUTHOR:{item.author}</div>
+                        <div>TITLE:{item.title}</div>
+                        <div>THEME:{item.theme}</div>
+                        <Button onClick={() => {
+                            history(COLLECTION_ROUTE + '/' + item._id)
+                        }}>Card Link</Button>
+                        <Button className="m-2" onClick={() => {
+                            delColl(item._id)
+                        }}>Delete collections</Button>
+                    </Card.Body>
 
-                        </Card>
-                    </Container>
-                )
-            })}
+                </Card>
+            </Container>
+
 
         </div>
     )
-},)
+})
 
 
 export default CollectionItemList;

@@ -8,11 +8,11 @@ import {observer} from "mobx-react-lite";
 import {Context} from "../index";
 
 const Collections = () => {
-    const {collections} = useContext(Context)
+    const {types} = useContext(Context)
 
 
     useEffect((() => {
-            collections.getTypes().then(types => collections.setTypes(types))
+            types.getTypes().then(type => types.setTypes(type))
         }
     ), [0])
 
