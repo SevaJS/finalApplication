@@ -4,20 +4,20 @@ import CollectionItemService from "../service/CollectionItemService";
 export default class collectionsItemStore {
 
 
-    item = []
+    items = []
 
     constructor() {
-        this.item = []
+        this.items = []
         makeAutoObservable(this, {item: observable}, {deep: true})
     }
 
-    setItems(item) {
-        this.item = item
+    setItems(items) {
+        this.items = items
     }
 
-    async getItems(id) {
+    async getItems() {
         try {
-            const res = await CollectionItemService.getItems(id)
+            const res = await CollectionItemService.getItems()
             this.setItems(res)
             return res;
 
@@ -60,8 +60,6 @@ export default class collectionsItemStore {
 
 
     async createCollItem(data, id) {
-        debugger
-        debugger
         try {
             const res = await CollectionItemService.createItem(data, id)
             return res;

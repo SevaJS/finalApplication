@@ -9,18 +9,22 @@ import UserList from "../adminComponents/UserList";
 import CreateType from "../components/modals/CreateType";
 import CollectionItemList from "../adminComponents/CollectionItemLIst";
 import {observer} from "mobx-react-lite";
+import ItemsList from "../adminComponents/ItemsList";
 
 const Admin = observer(() => {
     const [collVisible, setCollVisible] = useState(false);
     const [typeVisible, setTypeVisible] = useState(false);
     const [key, setKey] = useState('home');
     const {collections} = useContext(Context)
-    const [items, setItems] = useState("")
+    const {items} = useContext(Context)
+    const [colls, setColls] = useState("")
+    const [item, setItem] = useState("")
     const [users, setUsers] = useState("")
 
     useEffect((() => {
             collections.getUsers().then(item => setUsers(item))
-            collections.getItems().then(item => setItems(item))
+            collections.getItems().then(item => setColls(item))
+            items.getItems().then(item => setItem(item))
 
         }
     ), [0])
@@ -52,7 +56,7 @@ const Admin = observer(() => {
                     }
                 </Tab>
                 <Tab eventKey="profile" title="Collections">
-                    {items ?
+                    {colls ?
                         <div>
                             {collections.item.map(item =>
                                 <CollectionItemList item={item}/>
@@ -64,7 +68,18 @@ const Admin = observer(() => {
                     }
 
                 </Tab>
-                <Tab eventKey="contact" title="Contact" disabled>
+                <Tab eventKey="contact" title="Contact">
+                    {item ?
+                        <div>
+                            {items.items.map(item =>
+                                <ItemsList item={item}/>
+                            )}
+                        </div>
+                        :
+                        <div>LOADING</div>
+
+                    }
+
                 </Tab>
             </Tabs>
 

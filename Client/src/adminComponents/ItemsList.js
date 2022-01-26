@@ -8,14 +8,14 @@ import {observer} from "mobx-react-lite";
 import {Context} from "../index";
 
 
-const CollectionItemList = observer(({item}) => {
+const ItemsList = observer(({item}) => {
     debugger
     const history = useNavigate();
     const {collections} = useContext(Context);
 
     async function delColl(id, authorID) {
         debugger
-        await collections.dellColl(id,authorID)
+        await collections.dellColl(id, authorID)
 
     }
 
@@ -26,8 +26,6 @@ const CollectionItemList = observer(({item}) => {
                     <Card.Body>
                         <div>ID:{item._id}</div>
                         <div>AUTHOR:{item.author}</div>
-                        <div>TITLE:{item.title}</div>
-                        <div>THEME:{item.theme}</div>
                         <Button onClick={() => {
                             history(COLLECTION_ROUTE + '/' + item._id)
                         }}>Card Link</Button>
@@ -45,4 +43,4 @@ const CollectionItemList = observer(({item}) => {
 })
 
 
-export default CollectionItemList;
+export default ItemsList;

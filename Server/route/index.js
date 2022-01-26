@@ -24,17 +24,17 @@ router.post('/types', checkRoleMiddle("ADMIN"), typeControllers.createType)
 router.get('/types', typeControllers.getTypes)
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 router.get('/collections', collectionControllers.getAllColl)
-router.get('/usersCollections', collectionControllers.getUsersColls)
+router.get('/usersCollections/:id', collectionControllers.getUsersColls)
 router.put('/collections', collectionControllers.editCollDependence)
 router.get('/collections/:id', collectionControllers.getOneColl)
-router.post('/collections',checkRoleMiddle(), collectionControllers.createColl)
+router.post('/collections', checkRoleMiddle(), collectionControllers.createColl)
 router.post('/collections/del', checkRoleMiddle(), collectionControllers.dellColl)
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 router.put('/collections/:id/:id', collectionItemControllers.editCollItem)
 router.get('/collectionItem/:id', collectionItemControllers.getOneCollItem)
 router.get('/collectionItems', collectionItemControllers.getAllCollItem)
-router.post('/collections/:id/', collectionItemControllers.createCollItem)
-router.post('/collections/:id/del', checkRoleMiddle("ADMIN"), collectionItemControllers.dellCollItem)
+router.post('/collections/:id/', checkRoleMiddle(), collectionItemControllers.createCollItem)
+router.post('/collections/:id/del', checkRoleMiddle(), collectionItemControllers.dellCollItem)
 
 
 module.exports = router;

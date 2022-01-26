@@ -1,4 +1,6 @@
 const collectionService = require("../service/collectionsService")
+const CollectionsItemService = require("../service/collectionsItemService")
+
 
 class collectionControllers {
 
@@ -6,8 +8,9 @@ class collectionControllers {
     async createColl(req, res, next) {
         try {
 
-            const {title, theme, author, description, img} = req.body
-            const collData = await collectionService.createColl({title, theme, author, description, img});
+            const {title, theme, author, description} = req.body
+
+            const collData = await collectionService.createColl({title, theme, author, description});
             return res.json(collData);
 
 
@@ -20,6 +23,7 @@ class collectionControllers {
         try {
             const {id} = req.body;
             const coll = await collectionService.dellColl(id)
+            const dellDeps = await CollectionsItemService.dellCollDeps(id)
             return res.json(coll);
 
 
@@ -65,14 +69,13 @@ class collectionControllers {
 
         }
     }
+
     async getUsersColls(req, res, next) {
-        debugger
+
         try {
-            const {id} = req.body;
-            console.log(id)
-            const coll = await collectionService.getUsersColls(id)
+            const coll = await collectionService.getUsersColls(req.params.id)
             console.log(coll)
-            return res.json(coll);
+            return res.json(coll)
 
         } catch (e) {
             next(e);

@@ -31,8 +31,10 @@ export default class CollectionService {
         console.log(res)
         return res
     }
-    static async getUsersCollections(id, data) {
-        const res = api.get('/usersCollections', {id: id, data: data}).then(response => response.data)
+
+    static async getUsersCollections(id) {
+        debugger
+        const res = api.get('/usersCollections/' + id).then(response => response.data)
         console.log(res)
         return res
     }

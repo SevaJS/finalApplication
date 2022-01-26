@@ -1,4 +1,5 @@
 const Collection = require("../models/collectionModels.js")
+const collectionItem = require("../models/collectionItemModels")
 const collectionDto = require("../dtos/collectionsDto")
 
 
@@ -18,7 +19,9 @@ class CollectionsService {
 
     async dellColl(id) {
         try {
+            console.log(id)
             const coll = Collection.findByIdAndDelete(id);
+
             return coll;
 
         } catch (e) {
@@ -63,7 +66,6 @@ class CollectionsService {
         try {
             console.log(id)
             const coll = await Collection.find({author: id})
-            console.log(coll)
             return coll;
 
         } catch (e) {

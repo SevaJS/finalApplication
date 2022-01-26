@@ -34,7 +34,7 @@ const CollectionPage = () => {
                     />
                     <Row className="d-flex m-4  ">
 
-                        {item.items.map(item => {
+                        {collections.item.map(item => {
                             return (
                                 <CollectionItems
                                     item={item}

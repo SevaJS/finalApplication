@@ -9,12 +9,26 @@ const CollectionItemHeader = ({item, id}) => {
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const {items} = useContext(Context)
+    const {store} = useContext(Context)
+    const author = store._user.id;
 
-    function f(title, description) {
-        debugger
-        items.createCollItem({title, description}, id).then(res=>res)
+    function f(title, description, author) {
+        items.createCollItem({title, description, author}, id).then(res => res)
 
     }
+
+    function imageUploaded(file) {
+        let reader = new FileReader();
+        console.log("next");
+        reader.onload = function () {
+            let base64String = reader.result.replace("data:", "")
+                .replace(/^.+,/, "");
+
+            console.log(base64String);
+        }
+        reader.readAsDataURL(file);
+    }
+
 
     return (
         <Container className={"mt-5"}>
@@ -50,15 +64,23 @@ const CollectionItemHeader = ({item, id}) => {
                         </Col>
                     </Row>
                 </Row>
-                <Button onClick={() => f(title, description)}>ADD ITEM</Button>
-                <input
-                    value={title}
-                    onChange={(e => setTitle(e.target.value))}
-                />
-                <input
-                    value={description}
-                    onChange={(e => setDescription(e.target.value))}
-                />
+            </Card>
+            <Card className={"d-flex flex-row"} style={{justifyContent: "center", alignItems: "center"}}>
+                <Row>
+                    <Button onClick={() => f(title, description, author)}>ADD ITEM</Button>
+                    <input
+                        value={title}
+                        onChange={(e => setTitle(e.target.value))}
+                    />
+                    <input
+                        value={description}
+                        onChange={(e => setDescription(e.target.value))}
+                    />
+                    <input
+                        type={"file"}
+                        onChange={(e) => imageUploaded(e.target.value)}
+                    />
+                </Row>
             </Card>
         </Container>
     );

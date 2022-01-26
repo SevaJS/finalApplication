@@ -7,10 +7,13 @@ export default class collectionsStore {
 
     item = []
     users = []
+    userColls = []
 
     constructor() {
+
         this.item = []
         this.users = []
+        this.userColls = []
 
         makeAutoObservable(this, {item: observable}, {deep: true})
     }
@@ -19,8 +22,13 @@ export default class collectionsStore {
         this.item = item
     }
 
+
     setUsers(users) {
         this.users = users
+    }
+
+    setUserColls(colls) {
+        this.userColls = colls
     }
 
 
@@ -84,10 +92,10 @@ export default class collectionsStore {
 
     async dellColl(id) {
         try {
+
             const res = await CollectionService.dellColl(id)
-            console.log(res)
             await this.getItems()
-            return res;
+            return res
 
 
         } catch (e) {
@@ -126,8 +134,10 @@ export default class collectionsStore {
     }
 
     async getItem(id) {
+        debugger
         try {
             const res = await CollectionService.getCollection(id);
+            this.setItems(res.items)
             return res;
 
 
@@ -137,9 +147,12 @@ export default class collectionsStore {
         }
 
     }
+
     async getUsersCollections(id) {
+        debugger
         try {
             const res = await CollectionService.getUsersCollections(id);
+            await this.setUserColls(res)
             return res;
 
 
@@ -150,6 +163,20 @@ export default class collectionsStore {
 
     }
 
+    async dellUserColl(id, authorID) {
+        try {
+
+            const res = await CollectionService.dellColl(id)
+            await this.getUsersCollections(authorID)
+            return res
+
+
+        } catch (e) {
+            alert(e.response.data.message);
+
+        }
+
+    }
 
 
 }

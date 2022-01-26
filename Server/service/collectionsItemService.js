@@ -4,9 +4,9 @@ const collectionItem = require('../models/collectionItemModels')
 class CollectionsItemService {
 
 
-    async createCollItem({title, description, img}) {
+    async createCollItem({author, title, description, img, motherCollId}) {
         try {
-            const col = await collectionItem.create({title, description, img})
+            const col = await collectionItem.create({author, title, description, img, motherCollId})
             const collDto = new collectionItemDto(col);
             return collDto
         } catch (e) {
@@ -45,6 +45,27 @@ class CollectionsItemService {
             return item
         } catch (e) {
 
+            console.log(e)
+        }
+    }
+
+    async getAllUserCollItem(id) {
+        try {
+
+            const item = await collectionItem.findById(id);
+            return item
+        } catch (e) {
+
+            console.log(e)
+        }
+    }
+
+    async dellCollDeps(id) {
+        try {
+            const coll = collectionItem.deleteMany({motherCollId: id});
+            return coll;
+
+        } catch (e) {
             console.log(e)
         }
     }

@@ -6,20 +6,26 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import Tab from "react-bootstrap/Tab";
-import UserList from "../adminComponents/UserList";
-import CollectionItemList from "../adminComponents/CollectionItemLIst";
 import Tabs from "react-bootstrap/Tabs";
+import {observer} from "mobx-react-lite";
+import CollectionsList from "../userPageComponents/CollectionsList";
 
-const UserPage = () => {
+const UserPage = observer(() => {
+    debugger
     debugger
     const {collections} = useContext(Context);
+    const {items} = useContext(Context)
     const {id} = useParams()
     const [user, setUser] = useState("");
     const [key, setKey] = useState('home');
+    const [colls, setColls] = useState("");
+    const [item, setItem] = useState("");
 
 
     useEffect((() => {
             collections.getUser(id).then(item => setUser(item))
+            collections.getUsersCollections(id).then(item => setColls(item))
+
 
         }
     ), [0])
@@ -51,20 +57,20 @@ const UserPage = () => {
                 onSelect={(k) => setKey(k)}
                 className="mb-3"
             >
-                <Tab eventKey="home" title="Users">
-                    {users ?
+                <Tab eventKey="home" title="Collections">
+                    {colls ?
                         <div>
-                            {collections.users.map(item =>
-                                <UserList user={item}/>
+                            {collections.userColls.map(item =>
+                                <CollectionsList item={item}/>
                             )}
                         </div>
                         :
-                        <div>LOADING</div>
+                        <div>Тут пока пусто =)</div>
 
                     }
                 </Tab>
-                <Tab eventKey="profile" title="Collections">
-                    {items ?
+                <Tab eventKey="profile" title="Items">
+                    {/*{items ?
                         <div>
                             {collections.item.map(item =>
                                 <CollectionItemList item={item}/>
@@ -73,7 +79,7 @@ const UserPage = () => {
                         :
                         <div>LOADING</div>
 
-                    }
+                    }*/}
 
                 </Tab>
                 <Tab eventKey="contact" title="Contact" disabled>
@@ -83,6 +89,6 @@ const UserPage = () => {
 
         </Container>
     );
-};
+});
 
 export default UserPage;
