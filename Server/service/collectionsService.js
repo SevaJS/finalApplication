@@ -1,4 +1,5 @@
 const Collection = require("../models/collectionModels.js")
+const Image = require("../models/imgModels.js")
 const collectionItem = require("../models/collectionItemModels")
 const collectionDto = require("../dtos/collectionsDto")
 
@@ -8,6 +9,7 @@ class CollectionsService {
 
     async createColl({title, theme, author, description, img}) {
         try {
+            console.log(title, theme, author, description, img.path)
             const col = await Collection.create({title, theme, author, description, img})
             const collDto = new collectionDto(col);
             return collDto
@@ -66,6 +68,18 @@ class CollectionsService {
         try {
             console.log(id)
             const coll = await Collection.find({author: id})
+            return coll;
+
+        } catch (e) {
+
+        }
+    }
+
+    async uploadImg(path) {
+        try {
+            console.log(path)
+            const coll = await Image.create({path})
+            console.log(coll)
             return coll;
 
         } catch (e) {

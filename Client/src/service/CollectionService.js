@@ -4,8 +4,13 @@ import api from "../http";
 export default class CollectionService {
 
 
-    static async createCollection(item) {
-        const res = await api.post('/collections', item).then(response => response.data)
+    static async createCollection(data) {
+        debugger
+        const res = await api.post('/collections', data, {
+            headers: {
+                "content-type": 'multipart/form-data'
+            }
+        }).then(response => response.data)
         console.log(res)
         return res
     }
@@ -35,6 +40,17 @@ export default class CollectionService {
     static async getUsersCollections(id) {
         debugger
         const res = api.get('/usersCollections/' + id).then(response => response.data)
+        console.log(res)
+        return res
+    }
+
+    static async uploadImg(data) {
+        debugger
+        const res = api.post('/upload', data, {
+            headers: {
+                "content-type": 'multipart/form-data'
+            }
+        }).then(response => response.data)
         console.log(res)
         return res
     }

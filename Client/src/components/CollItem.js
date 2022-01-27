@@ -17,7 +17,7 @@ const CollItem = ({item}) => {
     return (
         <Col md={3} className={'mt-3'} onClick={() => click()}>
             <Card style={{width: 150, cursor: "pointer"}} border={"light"}>
-                <Image width={150} height={150} src={item.picture}/>
+                <Image width={150} height={150} src={item.img}/>
                 {item.title}
                 <div>BY:{item.author}</div>
             </Card>

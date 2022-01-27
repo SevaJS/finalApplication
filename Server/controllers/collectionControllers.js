@@ -7,10 +7,12 @@ class collectionControllers {
 
     async createColl(req, res, next) {
         try {
+            console.log(req)
 
             const {title, theme, author, description} = req.body
+            const img = req.file.path
 
-            const collData = await collectionService.createColl({title, theme, author, description});
+            const collData = await collectionService.createColl({title, theme, author, description, img});
             return res.json(collData);
 
 
@@ -76,6 +78,20 @@ class collectionControllers {
             const coll = await collectionService.getUsersColls(req.params.id)
             console.log(coll)
             return res.json(coll)
+
+        } catch (e) {
+            next(e);
+
+        }
+    }
+
+    async uploadImg(req, res, next) {
+
+        try {
+            console.log(req)
+            if (req.file) {
+                const img = await collectionService.uploadImg(req.file.path)
+            }
 
         } catch (e) {
             next(e);

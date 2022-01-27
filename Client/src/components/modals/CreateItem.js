@@ -20,18 +20,17 @@ const CreateItem = ({show, handleClose}) => {
     const [isLoading, setLoading] = useState(false)
     useEffect(() => {
         f()
-    }, [0])
+    })
 
 
-    const addItem = () => {
-        const title = name
-        const author = store._user.id
-        const theme = types.selectedTypeToCreate.type
-        const description = desc
-        const img = file
-        collections.createCollection({title, author, theme, description, img}).then(handleClose)
-
-
+    async function addItem() {
+        const formData = new FormData();
+        formData.append('picture', file)
+        formData.append('title', name)
+        formData.append('author', store._user.id)
+        formData.append('theme', types.selectedTypeToCreate.type)
+        formData.append('description', desc)
+        await collections.createCollection(formData).then(handleClose)
     }
 
     async function f() {
@@ -40,9 +39,6 @@ const CreateItem = ({show, handleClose}) => {
 
     }
 
-    const selectFile = e => {
-        setFile(e.target.files[0])
-    }
     return (
         <>
             <Modal
@@ -79,7 +75,7 @@ const CreateItem = ({show, handleClose}) => {
                         <Form.Control
                             className="mt-3"
                             type="file"
-                            onChange={selectFile}
+                            onChange={e => setFile(e.target.files[0])}
                         />
                         <Form.Control
                             value={desc}

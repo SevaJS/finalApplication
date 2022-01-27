@@ -71,17 +71,6 @@ const UserPage = observer(() => {
                     }
                 </Tab>
                 <Tab eventKey="profile" title="Items">
-                    {/*{items ?
-                        <div>
-                            {collections.item.map(item =>
-                                <CollectionItemList item={item}/>
-                            )}
-                        </div>
-                        :
-                        <div>LOADING</div>
-
-                    }*/}
-
                 </Tab>
                 <Tab eventKey="contact" title="Contact" disabled>
                 </Tab>

@@ -8,6 +8,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import Button from "react-bootstrap/Button";
 
 const CollectionItemHeader = ({item, id}) => {
+    debugger
     const [title, setTitle] = useState('')
     const [imgLink, setImgLink] = useState('')
     const [description, setDescription] = useState('')
@@ -32,10 +33,10 @@ const CollectionItemHeader = ({item, id}) => {
                     </Col>
                     <Col md={6}>
                         <h1>Название:{item.title}</h1>
-                        <h3>Автор:{item.author}</h3>
+                        <h3>Автор:{store._user.email}</h3>
                     </Col>
                     <Col md={4} style={{marginBlock: 0}}>
-                        <Row><h1>Рейтинг:</h1></Row>
+                        <Row><h1>Рейтинг: {item.rating}</h1></Row>
 
                     </Col>
                 </Row>
@@ -74,7 +75,7 @@ const CollectionItemHeader = ({item, id}) => {
                                      aria-label="With textarea" style={{height: 150}}/>
                     </InputGroup>
                     <InputGroup>
-                        <Button style={{width: 500}} className="mt-2">Добавить предмет</Button>
+                        <Button style={{width: 500}} className="mt-2"  onClick={() => f(title, description, author)}>Добавить предмет</Button>
                     </InputGroup>
                 </DropdownButton>
 

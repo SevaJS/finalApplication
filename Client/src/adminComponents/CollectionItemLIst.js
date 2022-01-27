@@ -9,13 +9,11 @@ import {Context} from "../index";
 
 
 const CollectionItemList = observer(({item}) => {
-    debugger
     const history = useNavigate();
     const {collections} = useContext(Context);
 
     async function delColl(id, authorID) {
-        debugger
-        await collections.dellColl(id,authorID)
+        await collections.dellColl(id, authorID)
 
     }
 

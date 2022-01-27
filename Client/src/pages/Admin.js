@@ -27,7 +27,7 @@ const Admin = observer(() => {
             items.getItems().then(item => setItem(item))
 
         }
-    ), [0])
+    ))
     return (
         <Container className='d-flex flex-column'>
             <Button className="mt-2" variant={'outline-dark'} onClick={() => setCollVisible(true)}>Добавить тип</Button>

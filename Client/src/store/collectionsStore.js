@@ -106,7 +106,7 @@ export default class collectionsStore {
     }
 
 
-    async createCollection(data) {
+    async createCollection(data) {debugger
         try {
             const res = await CollectionService.createCollection(data)
             await this.getItems()
@@ -166,6 +166,19 @@ export default class collectionsStore {
 
             const res = await CollectionService.dellColl(id)
             await this.getUsersCollections(authorID)
+            return res
+
+
+        } catch (e) {
+            alert(e.response.data.message);
+
+        }
+
+    }
+    async uploadImg(data) {debugger
+        try {
+
+            const res = await CollectionService.uploadImg(data)
             return res
 
 

@@ -3,7 +3,7 @@ const userController = require("../controllers/userControllers")
 const collectionControllers = require("../controllers/collectionControllers")
 const router = new Router();
 const {body} = require('express-validator')
-const authMiddle = require("../middlewares/auth-middle")
+const imgMiddle = require("../middlewares/img-middle")
 const checkRoleMiddle = require("../middlewares/checkRole-middle")
 const typeControllers = require("../controllers/typeControllers")
 const collectionItemControllers = require("../controllers/collectionItemControllers")
@@ -15,7 +15,7 @@ router.post('/registration',
 router.post('/login', userController.login);
 router.post('/logout', userController.logout);
 router.get('/refresh', userController.refresh);
-router.post('/upload',)
+/*router.post('/upload', imgMiddle.single("picture"), collectionControllers.uploadImg)*/
 router.get('/users/:id', userController.getUser);
 router.get('/activate/:link', userController.activateAcc);
 router.get('/users', checkRoleMiddle("ADMIN"), userController.getUsers);
@@ -28,7 +28,7 @@ router.get('/collections', collectionControllers.getAllColl)
 router.get('/usersCollections/:id', collectionControllers.getUsersColls)
 router.put('/collections', collectionControllers.editCollDependence)
 router.get('/collections/:id', collectionControllers.getOneColl)
-router.post('/collections', checkRoleMiddle(), collectionControllers.createColl)
+router.post('/collections', checkRoleMiddle(), imgMiddle.single("picture"), collectionControllers.createColl)
 router.post('/collections/del', checkRoleMiddle(), collectionControllers.dellColl)
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 router.put('/collections/:id/:id', collectionItemControllers.editCollItem)

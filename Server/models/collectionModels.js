@@ -5,11 +5,7 @@ const Collection = new Schema({
     author: {type: String, required: true},
     theme: {type: String, required: true},
     description: {type: String, required: true},
-    img:
-        {
-            data: Buffer,
-            contentType: String
-        },
+    img: {type: String},
     items: [],
     rating: {type: String, default: 0}
 

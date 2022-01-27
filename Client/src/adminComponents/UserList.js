@@ -8,7 +8,6 @@ import {useNavigate} from "react-router-dom";
 import {USER_ROUTE} from "../utils/consts";
 
 const UserList = ({user}) => {
-    debugger
     const {collections} = useContext(Context);
     const history = useNavigate();
 
