@@ -34,7 +34,8 @@ const UserPage = observer(() => {
             <Card style={{borderRadius: 10}} className={"p-3"}>
                 <Row>
                     <Col md={2}>
-                        <Image width={150} height={150} src={user.picture}/>
+                        <Image width={150} height={150}
+                               src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4bxhnd6kVOSazM4XZWjZ1cdgjx25wewGa6PMJDzLGyS3vV_gKb1cEFXGv0ev5oa6kTpU&usqp=CAU"}/>
                     </Col>
                     <Col md={6}>
                         <h1>{user.email}</h1>

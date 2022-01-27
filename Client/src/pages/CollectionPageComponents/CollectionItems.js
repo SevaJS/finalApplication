@@ -5,7 +5,6 @@ import {COLLECTION_ITEM_ROUTE} from "../../utils/consts";
 import {useNavigate} from "react-router-dom";
 
 const CollectionItems = ({item}, id) => {
-    debugger
     const history = useNavigate();
 
     async function click() {

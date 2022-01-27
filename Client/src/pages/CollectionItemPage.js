@@ -2,6 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import {Context} from "../index";
 import {useParams} from "react-router-dom";
 import Container from "react-bootstrap/Container";
+import Comments from "../components/Comments";
 
 const CollectionItemPage = () => {
     const {items} = useContext(Context);
@@ -14,14 +15,13 @@ const CollectionItemPage = () => {
         <div>
             <Container>
 
-
                 <div>{item.description}</div>
                 <div>{item.title}</div>
 
 
             </Container>
             <Container>
-                <div>COMMENTS</div>
+                <Comments/>
             </Container>
         </div>
 

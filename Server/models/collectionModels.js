@@ -11,6 +11,8 @@ const Collection = new Schema({
             contentType: String
         },
     items: [],
+    rating: {type: String, default: 0}
+
 
 })
 module.exports = model("Collection", Collection)

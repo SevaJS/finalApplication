@@ -9,7 +9,9 @@ const collectionItem = new Schema({
             data: Buffer,
             contentType: String
         },
-    motherCollId: {type: String, required: true}
+    motherCollId: {type: String, required: true},
+    comments: {type: Array},
+    rating: {type: String, default: 0}
 
 })
 module.exports = model("collitems", collectionItem)

@@ -15,6 +15,7 @@ router.post('/registration',
 router.post('/login', userController.login);
 router.post('/logout', userController.logout);
 router.get('/refresh', userController.refresh);
+router.post('/upload',)
 router.get('/users/:id', userController.getUser);
 router.get('/activate/:link', userController.activateAcc);
 router.get('/users', checkRoleMiddle("ADMIN"), userController.getUsers);

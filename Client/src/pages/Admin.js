@@ -30,11 +30,10 @@ const Admin = observer(() => {
     ), [0])
     return (
         <Container className='d-flex flex-column'>
-            <Button variant={'outline-dark'} className="mt-2">Пользователи</Button>
-            <Button variant={'outline-dark'} className="mt-2">Коллекции</Button>
-            <Button className="mt-2" onClick={() => setCollVisible(true)}>Добавить тип</Button>
+            <Button className="mt-2" variant={'outline-dark'} onClick={() => setCollVisible(true)}>Добавить тип</Button>
             <CreateType show={collVisible} handleClose={() => setCollVisible(false)}/>
-            <Button className="mt-2" onClick={() => setTypeVisible(true)}>Добавить коллекуцию</Button>
+            <Button className="mt-2" variant={'outline-dark'} onClick={() => setTypeVisible(true)}>Добавить
+                коллекуцию</Button>
             <CreateItem show={typeVisible} handleClose={() => setTypeVisible(false)}/>
 
             <Tabs

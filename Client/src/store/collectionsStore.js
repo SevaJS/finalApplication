@@ -134,7 +134,6 @@ export default class collectionsStore {
     }
 
     async getItem(id) {
-        debugger
         try {
             const res = await CollectionService.getCollection(id);
             this.setItems(res.items)
@@ -149,7 +148,6 @@ export default class collectionsStore {
     }
 
     async getUsersCollections(id) {
-        debugger
         try {
             const res = await CollectionService.getUsersCollections(id);
             await this.setUserColls(res)

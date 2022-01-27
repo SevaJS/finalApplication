@@ -1,12 +1,15 @@
 import React, {useContext, useState} from 'react';
-import {Button, Card, Container} from "react-bootstrap";
+import {Card, Container, FormControl, InputGroup} from "react-bootstrap";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import {Context} from "../../index";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import Button from "react-bootstrap/Button";
 
 const CollectionItemHeader = ({item, id}) => {
     const [title, setTitle] = useState('')
+    const [imgLink, setImgLink] = useState('')
     const [description, setDescription] = useState('')
     const {items} = useContext(Context)
     const {store} = useContext(Context)
@@ -14,59 +17,68 @@ const CollectionItemHeader = ({item, id}) => {
 
     function f(title, description, author) {
         items.createCollItem({title, description, author}, id).then(res => res)
+        setTitle('')
+        setDescription('')
 
     }
-
-    function imageUploaded(file) {
-        let reader = new FileReader();
-        console.log("next");
-        reader.onload = function () {
-            let base64String = reader.result.replace("data:", "")
-                .replace(/^.+,/, "");
-
-            console.log(base64String);
-        }
-        reader.readAsDataURL(file);
-    }
-
 
     return (
-        <Container className={"mt-5"}>
-            <Card style={{borderRadius: 10}} className={"p-3"}>
+        <Container className={"mt-5"} style={{border: "none"}}>
+            <Card style={{border: "none"}} className={"p-3"}>
                 <Row>
                     <Col md={2}>
-                        <Image width={150} height={150} src={item.picture}/>
+                        <Image width={150} alt={"Изображение"} height={150}
+                               src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4bxhnd6kVOSazM4XZWjZ1cdgjx25wewGa6PMJDzLGyS3vV_gKb1cEFXGv0ev5oa6kTpU&usqp=CAU"}/>
                     </Col>
                     <Col md={6}>
-                        <h1>{item.title}</h1>
-                        <h3>{item.author}</h3>
+                        <h1>Название:{item.title}</h1>
+                        <h3>Автор:{item.author}</h3>
                     </Col>
                     <Col md={4} style={{marginBlock: 0}}>
-                        <Row className={"m-0 mt-4"}>
-                            <Col style={{margin: 0, borderBottom: "solid", borderRight: "solid"}}>1</Col>
-                            <Col style={{margin: 0, borderBottom: "solid", borderLeft: "solid"}}>2</Col>
-                        </Row>
-                        <Row className={"m-0"}>
-                            <Col style={{margin: 0, borderTop: "solid", borderRight: "solid"}}>3</Col>
-                            <Col style={{margin: 0, borderTop: "solid", borderLeft: "solid"}}>4</Col>
-                        </Row>
+                        <Row><h1>Рейтинг:</h1></Row>
 
                     </Col>
-
                 </Row>
                 <Row style={{height: 200, alignItems: "center"}} className={"d-flex flex-row align-item-center"}>
                     <Row>
-                        <Col md={2}>
-                            {item.description}
-                        </Col>
-                        <Col md={2}>
-                            <Image width={150} height={150} src={item.picture}/>
-                        </Col>
+                        <Card style={{height: 150, borderRadius: 20}} className={"m-2"}>
+                            <Col className={"m-3"}>
+                                {item.description}
+                            </Col>
+                        </Card>
                     </Row>
                 </Row>
             </Card>
-            <Card className={"d-flex flex-row"} style={{justifyContent: "center", alignItems: "center"}}>
-                <Row>
+            <Card
+                style={{border: "none", height: 200}}>
+                <DropdownButton id="dropdown-basic-button" title="Добавить предмет">
+                    <InputGroup className="mb-3">
+                        <InputGroup.Text id="basic-addon1">Название:</InputGroup.Text>
+                        <FormControl
+                            value={title}
+                            onChange={(e => setTitle(e.target.value))}
+                            aria-describedby="basic-addon1"
+                        />
+                    </InputGroup>
+                    <InputGroup className="mb-3">
+                        <InputGroup.Text id="basic-addon3">
+                            Ссылка на изображение:
+                        </InputGroup.Text>
+                        <FormControl value={imgLink}
+                                     onChange={(e => setImgLink(e.target.value))} id="basic-url"
+                                     aria-describedby="basic-addon3"/>
+                    </InputGroup>
+                    <InputGroup>
+                        <InputGroup.Text>Описание:</InputGroup.Text>
+                        <FormControl value={description} onChange={(e => setDescription(e.target.value))} as="textarea"
+                                     aria-label="With textarea" style={{height: 150}}/>
+                    </InputGroup>
+                    <InputGroup>
+                        <Button style={{width: 500}} className="mt-2">Добавить предмет</Button>
+                    </InputGroup>
+                </DropdownButton>
+
+                {/*<Row>
                     <Button onClick={() => f(title, description, author)}>ADD ITEM</Button>
                     <input
                         value={title}
@@ -78,9 +90,8 @@ const CollectionItemHeader = ({item, id}) => {
                     />
                     <input
                         type={"file"}
-                        onChange={(e) => imageUploaded(e.target.value)}
                     />
-                </Row>
+                </Row>*/}
             </Card>
         </Container>
     );

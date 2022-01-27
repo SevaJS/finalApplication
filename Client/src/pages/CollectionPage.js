@@ -32,8 +32,10 @@ const CollectionPage = () => {
                         item={item}
                         id={id}
                     />
-                    <Row className="d-flex m-4  ">
-
+                    <hr/>
+                    <h1 style={{textAlign: "center"}}>Предеметы коллекции</h1>
+                    <Row className="d-flex m-5  "
+                         style={{alignItems: "center",}}>
                         {collections.item.map(item => {
                             return (
                                 <CollectionItems
