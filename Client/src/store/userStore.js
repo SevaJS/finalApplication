@@ -2,6 +2,7 @@ import {makeAutoObservable} from 'mobx'
 import AuthService from "../service/AuthService";
 import axios from "axios";
 import {API_URL} from "../http";
+import UserService from "../service/UserService";
 
 export default class UserStore {
 
@@ -23,7 +24,6 @@ export default class UserStore {
     async login(email: string, password: string) {
         try {
             const res = await AuthService.login(email, password);
-            console.log(res)
             localStorage.setItem('token', res.accessToken);
             this.setAuth(true);
             this.setUser(res.user)
@@ -66,9 +66,7 @@ export default class UserStore {
     async checkAuth() {
         try {
             const res = await axios.get(`${API_URL}/refresh`, {withCredentials: true});
-            console.log(res.data.accessToken)
             localStorage.setItem('token', res.data.accessToken);
-            console.log(localStorage)
             this.setUser(res.data.user)
             this.setAuth(true);
             return res
@@ -78,6 +76,16 @@ export default class UserStore {
             alert(e.response.data.message);
 
         }
+    }
+
+    async editProfile(data) {
+        try {
+            return await UserService.editProfile(data).then(res => res)
+        } catch (e) {
+            alert(e.response.data.message);
+
+        }
+
     }
 
 }

@@ -5,9 +5,10 @@ const Collection = new Schema({
     author: {type: String, required: true},
     theme: {type: String, required: true},
     description: {type: String, required: true},
-    img: {type: String},
-    items: [],
-    rating: {type: String, default: 0}
+    picture: {type: String, required: true},
+    items: {type: Array},
+    rating: {type: String, default: 0},
+    authorName: {type: String, required: true}
 
 
 })

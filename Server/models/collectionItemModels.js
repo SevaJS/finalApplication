@@ -4,11 +4,7 @@ const collectionItem = new Schema({
     title: {type: String, required: true},
     description: {type: String, required: true},
     author: {type: String, required: true},
-    img:
-        {
-            data: Buffer,
-            contentType: String
-        },
+    picture: {type: Array},
     motherCollId: {type: String, required: true},
     comments: {type: Array},
     rating: {type: String, default: 0}

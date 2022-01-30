@@ -1,55 +1,46 @@
-import {makeAutoObservable, observable} from 'mobx'
+import { makeAutoObservable, observable } from "mobx";
 import TypeService from "../service/TypeService";
 
 export default class typeStore {
+  _selectedType = {};
 
-    _selectedType = {};
-    typeToCreate = {}
-    collTypes = []
+  typeToCreate = { type: "All" };
 
-    constructor() {
-        this._selectedType = {}
-        this.typeToCreate = {}
-        this.collTypes = []
+  collTypes = [];
 
-        makeAutoObservable(this, {item: observable}, {deep: true})
-    }
+  constructor() {
+    this._selectedType = {};
+    this.typeToCreate = {};
+    this.collTypes = [];
 
+    makeAutoObservable(this, { item: observable }, { deep: true });
+  }
 
-    setTypes(type) {
-        this.collTypes = type
-    }
+  setTypes(type) {
+    this.collTypes = type;
+  }
 
-    setSelectedTypeToCreate(type) {
-        this.typeToCreate = type
-    }
+  setSelectedTypeToCreate(type) {
+    this.typeToCreate = type;
+  }
 
-    get selectedTypeToCreate() {
-        return this.typeToCreate
-    }
+  get selectedTypeToCreate() {
+    return this.typeToCreate;
+  }
 
-    setSelectedType(type) {
-        this._selectedType = type;
+  setSelectedType(type) {
+    this._selectedType = type;
+  }
 
-    }
+  get selectedType() {
+    return this._selectedType;
+  }
 
+  async getTypes() {
+    return await TypeService.getTypes();
+  }
 
-    get selectedType() {
-        return this._selectedType
-
-    }
-
-    async getTypes() {
-        const res = await TypeService.getTypes()
-        console.log(res)
-        return res
-    }
-
-    async createType(data) {
-        const res = await TypeService.createTypes(data)
-        console.log(res)
-        return res
-    }
-
-
+  async createType(data) {
+    return await TypeService.createTypes(data);
+  }
 }

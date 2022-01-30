@@ -1,18 +1,14 @@
 const Collection = require("../models/collectionModels.js")
-const Image = require("../models/imgModels.js")
-const collectionItem = require("../models/collectionItemModels")
 const collectionDto = require("../dtos/collectionsDto")
 
 
 class CollectionsService {
 
 
-    async createColl({title, theme, author, description, img}) {
+    async createColl({title, theme, author, description, picture, authorName}) {
         try {
-            console.log(title, theme, author, description, img.path)
-            const col = await Collection.create({title, theme, author, description, img})
+            const col = await Collection.create({title, theme, author, description, picture, authorName})
             const collDto = new collectionDto(col);
-            return collDto
         } catch (e) {
             console.log(e)
 
@@ -21,69 +17,64 @@ class CollectionsService {
 
     async dellColl(id) {
         try {
-            console.log(id)
             const coll = Collection.findByIdAndDelete(id);
-
             return coll;
 
         } catch (e) {
-
+            console.log(e)
         }
     }
 
-    async getAllColl() {
+    async getAllColl(selectedType) {
         try {
-            const coll = await Collection.find();
+            let coll;
+            if (selectedType === 'All' || !selectedType) {
+                coll = await Collection.find();
+            } else if (selectedType) {
+                coll = await Collection.find({theme: selectedType});
+            }
             return coll
 
         } catch (e) {
-
+            console.log(e)
         }
     }
 
     async getOneColl(id) {
         try {
-            debugger
             const item = await Collection.findById(id);
-            console.log(item)
             return item
         } catch (e) {
 
-
+            console.log(e)
         }
     }
 
     async editCollDependence(id, data) {
         try {
             const coll = await Collection.findByIdAndUpdate(id, {$push: {items: data}})
-            console.log(coll)
             return coll;
 
         } catch (e) {
-
+            console.log(e)
         }
     }
 
     async getUsersColls(id) {
         try {
-            console.log(id)
-            const coll = await Collection.find({author: id})
-            return coll;
+            return await Collection.find({author: id});
 
         } catch (e) {
-
+            console.log(e)
         }
     }
 
-    async uploadImg(path) {
+    async dellDeps(itemId, authorID) {
         try {
-            console.log(path)
-            const coll = await Image.create({path})
-            console.log(coll)
-            return coll;
+            const res = await Collection.findOneAndUpdate({_id: authorID}, {$pull: {items: itemId}})
 
         } catch (e) {
-
+            console.log(e)
         }
     }
 

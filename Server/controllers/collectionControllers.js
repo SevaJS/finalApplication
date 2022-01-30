@@ -7,12 +7,15 @@ class collectionControllers {
 
     async createColl(req, res, next) {
         try {
-            console.log(req)
-
-            const {title, theme, author, description} = req.body
-            const img = req.file.path
-
-            const collData = await collectionService.createColl({title, theme, author, description, img});
+            const {title, theme, author, description, picture, authorName} = req.body
+            const collData = await collectionService.createColl({
+                title,
+                theme,
+                author,
+                description,
+                picture,
+                authorName
+            });
             return res.json(collData);
 
 
@@ -38,7 +41,6 @@ class collectionControllers {
     async editCollDependence(req, res, next) {
         try {
             const {id} = req.body;
-            console.log(id)
             const coll = await collectionService.editCollDependence(id)
             return res.json(coll);
 
@@ -50,8 +52,8 @@ class collectionControllers {
 
     async getAllColl(req, res, next) {
         try {
-
-            const coll = await collectionService.getAllColl()
+            const selectedType = req.query.type;
+            const coll = await collectionService.getAllColl(selectedType)
             return res.json(coll)
 
         } catch (e) {
@@ -61,7 +63,6 @@ class collectionControllers {
     }
 
     async getOneColl(req, res, next) {
-        debugger
         try {
             const coll = await collectionService.getOneColl(req.params.id)
             return res.json(coll);
@@ -73,28 +74,20 @@ class collectionControllers {
     }
 
     async getUsersColls(req, res, next) {
-
         try {
             const coll = await collectionService.getUsersColls(req.params.id)
-            console.log(coll)
             return res.json(coll)
-
         } catch (e) {
             next(e);
 
         }
     }
 
-    async uploadImg(req, res, next) {
-
+    async dellCollDeps(id, authorID) {
         try {
-            console.log(req)
-            if (req.file) {
-                const img = await collectionService.uploadImg(req.file.path)
-            }
+            const edit = await collectionService.dellDeps(id, authorID)
 
         } catch (e) {
-            next(e);
 
         }
     }

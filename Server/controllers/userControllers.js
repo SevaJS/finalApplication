@@ -71,7 +71,6 @@ class userControllers {
     async dellUsers(req, res, next) {
         try {
             const {id} = req.body;
-            console.log(req.body)
             const user = await userService.dellUser(id)
             return res.json(user)
 
@@ -99,6 +98,19 @@ class userControllers {
             next(e);
         }
     }
+
+
+    async editUserProfile(req, res, next) {
+        try {
+            const {nick, description, picture, id} = req.body
+            const user = await userService.editUserProfile(id, picture, description, nick)
+            return res.json(user)
+
+        } catch (e) {
+            next(e);
+        }
+    }
+
 
 }
 

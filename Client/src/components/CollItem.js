@@ -1,29 +1,45 @@
-import React from 'react';
-import {Card, Col} from "react-bootstrap";
+import React from "react";
+import { Card, Col } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
-import {useNavigate} from "react-router-dom";
-import {COLLECTION_ROUTE} from "../utils/consts";
+import { useNavigate } from "react-router-dom";
+import { COLLECTION_ROUTE } from "../utils/consts";
 
+function CollItem({ item }) {
+  const history = useNavigate();
 
-const CollItem = ({item}) => {
+  async function click() {
+    history(`${COLLECTION_ROUTE}/${item._id}`);
+  }
 
-    async function click() {
-        history(COLLECTION_ROUTE + '/' + item._id);
-
-
-    }
-
-    const history = useNavigate();
-    return (
-        <Col md={3} className={'mt-3'} onClick={() => click()}>
-            <Card style={{width: 150, cursor: "pointer"}} border={"light"}>
-                <Image width={150} height={150} src={item.img}/>
-                {item.title}
-                <div>BY:{item.author}</div>
-            </Card>
-
-        </Col>
-    );
-};
+  return (
+    <Col md={4} className="d-flex  mt-4 " onClick={() => click()}>
+      <Card
+        style={{
+          minWidth: 300,
+          cursor: "pointer",
+          borderStyle: "solid",
+          borderColor: "black",
+        }}
+        className="m-3"
+      >
+        <Image
+          width={200}
+          height={200}
+          src={item.picture}
+          className="mx-auto mt-3"
+        />
+        <hr />
+        <h2>
+          Название:
+          <br />
+          {item.title}
+        </h2>
+        <hr />
+        <h4>Тема:{item.theme}</h4>
+        <h4>BY:{item.authorName}</h4>
+      </Card>
+    </Col>
+  );
+}
 
 export default CollItem;

@@ -1,59 +1,40 @@
 import api from "../http";
 
-
 export default class CollectionService {
+  static async createCollection(data) {
+    const res = await api
+      .post("/collections", data)
+      .then((response) => response.data);
+    return res;
+  }
 
+  static async getCollections(selectedType) {
+    return api
+      .get("/collections", { params: { type: selectedType } })
+      .then((response) => response.data);
+  }
 
-    static async createCollection(data) {
-        debugger
-        const res = await api.post('/collections', data, {
-            headers: {
-                "content-type": 'multipart/form-data'
-            }
-        }).then(response => response.data)
-        console.log(res)
-        return res
-    }
+  static async getCollection(id) {
+    return api.get(`/collections/${id}`).then((response) => response.data);
+  }
 
-    static async getCollections() {
-        const res = api.get('/collections').then(response => response.data)
-        return res
-    }
+  static async dellColl(id) {
+    return api
+      .post("/collections/del", { id })
+      .then((response) => response.data);
+  }
 
-    static async getCollection(id) {
-        const res = api.get('/collections/' + id).then(response => response.data)
-        return res
-    }
+  static async editCollDependence(id, data) {
+    return api
+      .put("/collections", { id, data })
+      .then((response) => response.data);
+  }
 
-    static async dellColl(id) {
-        const res = api.post('/collections/del', {id: id}).then(response => response.data)
-        console.log(res)
-        return res
-    }
+  static async getUsersCollections(id) {
+    return api.get(`/usersCollections/${id}`).then((response) => response.data);
+  }
 
-    static async editCollDependence(id, data) {
-        const res = api.put('/collections', {id: id, data: data}).then(response => response.data)
-        console.log(res)
-        return res
-    }
-
-    static async getUsersCollections(id) {
-        debugger
-        const res = api.get('/usersCollections/' + id).then(response => response.data)
-        console.log(res)
-        return res
-    }
-
-    static async uploadImg(data) {
-        debugger
-        const res = api.post('/upload', data, {
-            headers: {
-                "content-type": 'multipart/form-data'
-            }
-        }).then(response => response.data)
-        console.log(res)
-        return res
-    }
-
-
+  static async getUsersItems(id) {
+    return api.get(`/usersItems/${id}`).then((response) => response.data);
+  }
 }

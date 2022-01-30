@@ -75,7 +75,6 @@ class userService {
 
     async dellUser(id) {
         try {
-            console.log(id)
             const user = userModel.findByIdAndDelete(id);
             return user;
 
@@ -91,6 +90,22 @@ class userService {
 
     async getUser(id) {
         const user = await userModel.findById(id);
+        return user
+    }
+
+    async editUserProfile(id, picture, description, nick) {
+        const uniqUser = await userModel.findOne({nick})
+        if (!uniqUser) {
+            throw ApiError.BadRequest(`Пользовательс с ником ${nick}, уже существует!`)
+        }
+        if (picture) {
+
+        }
+        const user = await userModel.findByIdAndUpdate(id, {
+            avatar: picture ? picture : '',
+            description: description,
+            nickName: nick
+        });
         return user
     }
 }

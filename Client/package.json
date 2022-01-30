@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.24.0",
     "bootstrap": "^5.1.3",
+    "eslint-config-airbnb": "^19.0.4",
     "image-to-base64": "^2.2.0",
     "install": "^0.13.0",
     "istanbul-lib-report": "^3.0.0",
@@ -17,6 +18,7 @@
     "react": "^17.0.2",
     "react-bootstrap": "^2.1.0",
     "react-dom": "^17.0.2",
+    "react-image-file-resizer": "^0.4.7",
     "react-markdown": "^8.0.0",
     "react-markdown-textarea": "^1.0.1",
     "react-router-dom": "^6.2.1",
@@ -28,7 +30,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint src/**/*.js --fix && prettier --write ."
   },
   "eslintConfig": {
     "extends": [
@@ -47,5 +50,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^8.7.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.28.0",
+    "prettier": "^2.5.1"
   }
 }

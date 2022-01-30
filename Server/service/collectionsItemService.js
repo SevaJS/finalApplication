@@ -4,11 +4,10 @@ const collectionItem = require('../models/collectionItemModels')
 class CollectionsItemService {
 
 
-    async createCollItem({author, title, description, img, motherCollId}) {
+    async createCollItem({author, title, description, picture, motherCollId}) {
         try {
-            const col = await collectionItem.create({author, title, description, img, motherCollId})
-            const collDto = new collectionItemDto(col);
-            return collDto
+            const col = await collectionItem.create({author, title, description, picture, motherCollId})
+            return new collectionItemDto(col)
         } catch (e) {
             console.log(e)
 
@@ -17,8 +16,7 @@ class CollectionsItemService {
 
     async dellCollItem(id) {
         try {
-            const coll = collectionItem.findByIdAndDelete(id);
-            return coll;
+            return collectionItem.findByIdAndDelete(id);
 
         } catch (e) {
             console.log(e)
@@ -27,9 +25,7 @@ class CollectionsItemService {
 
     async getAllCollItem() {
         try {
-            const coll = await collectionItem.find()
-            console.log(coll)
-            return coll
+            return await collectionItem.find()
 
         } catch (e) {
             console.log(e)
@@ -39,10 +35,7 @@ class CollectionsItemService {
 
     async getOneCollItem(id) {
         try {
-            console.log(id)
-
-            const item = await collectionItem.findById(id);
-            return item
+            return await collectionItem.findById(id)
         } catch (e) {
 
             console.log(e)
@@ -51,9 +44,7 @@ class CollectionsItemService {
 
     async getAllUserCollItem(id) {
         try {
-
-            const item = await collectionItem.findById(id);
-            return item
+            return await collectionItem.findById(id)
         } catch (e) {
 
             console.log(e)
@@ -62,11 +53,43 @@ class CollectionsItemService {
 
     async dellCollDeps(id) {
         try {
-            const coll = collectionItem.deleteMany({motherCollId: id});
-            return coll;
+            return collectionItem.deleteMany({motherCollId: id});
 
         } catch (e) {
             console.log(e)
+        }
+    }
+
+    async getUsersItems(id) {
+        try {
+            return await collectionItem.find({author: id});
+
+        } catch (e) {
+
+        }
+    }
+
+    async getItemsOfColl(id) {
+        try {
+            return await collectionItem.find({motherCollId: id})
+        } catch (e) {
+
+        }
+    }
+
+    async addComm(id, comment, author) {
+        try {
+            const res = await collectionItem.findByIdAndUpdate(id, {
+                $push: {
+                    comments: {
+                        ovner: author,
+                        comment: comment
+                    }
+                }
+            });
+            return res
+        } catch (e) {
+
         }
     }
 
