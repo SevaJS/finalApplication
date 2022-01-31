@@ -19,7 +19,7 @@ function CollectionItemHeader({ item, id }) {
   function createItem(title, description, author) {
     if (author !== item.author && store._user.role !== "ADMIN") {
       alert("Вы не являетесь владельцом коллекции!");
-      next();
+      return null
     }
     items
       .createCollItem({ title, description, author, file }, id)
